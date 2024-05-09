@@ -64,13 +64,12 @@
 
 def solve(A: int):
     number_sequence = []
-
     hash_map = {}
     num = A
     while num:
         rem = num % 10
         number_sequence.append(rem)
-        if rem in hash_map or rem == 1:
+        if rem in hash_map:
             return 0
         else:
             hash_map[rem] = 1
@@ -84,13 +83,14 @@ def solve(A: int):
 
     number_sequence.reverse()
 
-    for i in range(len(number_sequence)-2):
+    for i in range(len(number_sequence)-1):
         j = i + 1
         product = number_sequence[i]
         while j < len(number_sequence):
             product *= number_sequence[j]
-
-            if product in hash_map:
+            if product not in hash_map:
+                hash_map[product] = 1
+            else:
                 return 0
             j += 1
 
@@ -98,7 +98,7 @@ def solve(A: int):
 
 
 if __name__ == "__main__":
-    A = 263
+    A = 1
     print(solve(A))
 
 
