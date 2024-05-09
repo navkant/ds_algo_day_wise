@@ -44,17 +44,21 @@ def longest_consecutive_sequence(A: List[int]) -> int:
     ans = 0
 
     for index, num in enumerate(A):
-        count = 1
-        j = num
-        while True:
-            if j+1 in hash_map:
-                count += 1
-                j += 1
-            else:
-                break
+        if num - 1 in hash_map:
+            # this helps in reducing time complexity 
+            # as we will start inner loop from smallest element only
+            continue
+        else:
+            count = 1
+            j = num
+            while True:
+                if j+1 in hash_map:
+                    count += 1
+                    j += 1
+                else:
+                    break
 
-
-        ans = max(ans, count)
+            ans = max(ans, count)
 
     return ans
 
