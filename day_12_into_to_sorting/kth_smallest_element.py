@@ -39,19 +39,21 @@
 from typing import List
 
 def kth_smallest_element(A: List[int], B: int) -> int:
-    A = sorted(A)
     for i in range(B):
-        j = i + 1
-        min_idx = 0
-        for j in range(B + 1):
-            if A[j] < A[i]:
+        min_idx = i
+        for j in range(i+1, len(A)):
+            if A[j] < A[min_idx]:
                 min_idx = j
+            else:
+                continue
         A[i], A[min_idx] = A[min_idx], A[i]
+        print(A)
 
-    return A[min_idx]
+    # print(A)
+    return A[B-1]
 
 
 if __name__ == "__main__":
-    A = [2, 1, 4, 3, 2]
+    A = [7, 6, 3, 4, 5, 1]
     B = 3
     print(kth_smallest_element(A, B))
