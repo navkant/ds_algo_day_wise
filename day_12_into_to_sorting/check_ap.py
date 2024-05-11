@@ -13,4 +13,3 @@ def check_ap(A: List[int]) -> bool:
 
 if __name__ == "__main__":
     A = []
-    
