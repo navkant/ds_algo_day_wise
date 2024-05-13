@@ -55,4 +55,38 @@
 #    Increment 3 => [4, 4, 4, 3, 4].
 #  Max = 4. Min = 3.
 #  Therefore, abs|Max - Min| = |4 - 3| = 1.
+from typing import List
 
+
+def minimum_difference(A: List[int], B: int) -> int:
+    maxx = 0
+    k = B
+    for i in A:
+        maxx = max(i, maxx)
+    freq_arr = [0] * (maxx+1)
+    for i in A:
+        freq_arr[i] += 1
+    i = 0
+    j = maxx
+    while i < j:
+        if freq_arr[i] > freq_arr[j]:
+            if freq_arr[j] <= k:
+                freq_arr[j-1] = freq_arr[j-1] + freq_arr[j]
+                k = k - freq_arr[j]
+                j = j - 1
+            else:
+                break
+        else:
+            if freq_arr[i] <= k:
+                freq_arr[i+1] = freq_arr[i+1] + freq_arr[i]
+                k = k - freq_arr[i]
+                i = i + 1
+            else:
+                break
+    return j - i
+
+
+if __name__ == "__main__":
+    A = [2, 6, 3, 9, 8]
+    B = 3
+    print(minimum_difference(A, B))
